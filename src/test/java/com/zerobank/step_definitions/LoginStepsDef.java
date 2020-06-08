@@ -29,8 +29,17 @@ public class LoginStepsDef {
     @Then("Account summary page should be displayed")
     public void account_summary_page_should_be_displayed() {
         BrowserUtils.waitFor(3);
+        String expectedTitle = "Zero - Account Summary";
         String actualTitle = Driver.get().getTitle();
 
+        System.out.println("expectedTitle = " + expectedTitle);
+        System.out.println("actualTitle = " + actualTitle);
+        Assert.assertTrue("Verify that Account Summary Page is Displayed",actualTitle.contains(expectedTitle));
+
+    }
+    @Then("Error message {string} should be displayed.")
+    public void error_message_should_be_displayed(String string) {
+        System.out.println("Login and/or password are wrong");
     }
 
 }

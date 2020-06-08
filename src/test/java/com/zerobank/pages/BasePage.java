@@ -27,23 +27,13 @@ public abstract class  BasePage {
     @FindBy(xpath = ("(//a[@class='dropdown-toggle'])[2]"))
     public WebElement userMenu;
 
-
-
-    @FindBy(css = "div[class='loader-mask shown']")
-    @CacheLookup
-    protected WebElement loaderMask;
-
-    @FindBy(css = "h1[class='oro-subtitle']")
-    public WebElement pageSubTitle;
-
-    @FindBy(css = "#user-menu > a")
-    public WebElement userName;
+    @FindBy(xpath = "//a[contains(text(),'My Profile')]")
+    public WebElement myProfile;
 
     @FindBy(id="logout_link")
-    public WebElement logOut;
+    public  WebElement logOutBtn;
 
-    @FindBy(linkText = "My User")
-    public WebElement myUser;
+
 
 
     public BasePage() {
@@ -52,22 +42,10 @@ public abstract class  BasePage {
 
 
     /**
-     * @return page name, for example: Dashboard
-     */
-  /*
-    public String getPageSubTitle() {
-        //ant time we are verifying page name, or page subtitle, loader mask appears
-        waitUntilLoaderScreenDisappear();
-//        BrowserUtils.waitForStaleElement(pageSubTitle);
-        return pageSubTitle.getText();
-    }
-
-*/
-    /**
      * Waits until loader screen present. If loader screen will not pop up at all,
      * NoSuchElementException will be handled  bu try/catch block
      * Thus, we can continue in any case.
-     */
+
     public void waitUntilLoaderScreenDisappear() {
         try {
             WebDriverWait wait = new WebDriverWait(Driver.get(), 5);
@@ -77,24 +55,56 @@ public abstract class  BasePage {
         }
 
     }
+    */
 
-    public String getUserName(){
-        waitUntilLoaderScreenDisappear();
-        BrowserUtils.waitForVisibility(userName, 5);
-        return userName.getText();
+    public void goToTab(String tabName){
+
+        switch (tabName){
+            case "Account Summary":
+                menuOptions.get(0).click();
+                break;
+            case "Account Activity":
+                menuOptions.get(1).click();
+                break;
+
+            case "Transfer Funds":
+                menuOptions.get(2).click();
+                break;
+
+            case "Pay Bills":
+                menuOptions.get(3).click();
+                break;
+
+            case "My Money Map":
+                menuOptions.get(4).click();
+                break;
+
+            case "Online Statements":
+                menuOptions.get(5).click();
+                break;
+
+        }
+
     }
 
+
+
+
+    public String getUserName(){
+        BrowserUtils.waitForVisibility(userMenu, 5);
+        return userMenu.getText();
+    }
 
 
     public void logOut(){
         BrowserUtils.waitFor(2);
-        BrowserUtils.clickWithJS(userName);
-        BrowserUtils.clickWithJS(logOutLink);
+        BrowserUtils.clickWithJS(userMenu);
+        BrowserUtils.clickWithJS(logOutBtn);
     }
     public void goToMyUser(){
-        waitUntilLoaderScreenDisappear();
-        BrowserUtils.waitForClickablility(userName, 5).click();
-        BrowserUtils.waitForClickablility(myUser, 5).click();
+
+        BrowserUtils.waitForClickablility(userMenu, 5).click();
+        BrowserUtils.waitForClickablility(myProfile, 5).click();
 
     }
 
@@ -106,6 +116,9 @@ public abstract class  BasePage {
      * @param tab
      * @param module
      */
+
+
+    /*
     public void navigateToModule(String tab, String module) {
         String tabLocator = "//span[normalize-space()='" + tab + "' and contains(@class, 'title title-level-1')]";
         String moduleLocator = "//span[normalize-space()='" + module + "' and contains(@class, 'title title-level-2')]";
@@ -125,6 +138,10 @@ public abstract class  BasePage {
 //            BrowserUtils.waitForStaleElement(Driver.get().findElement(By.xpath(moduleLocator)));
             BrowserUtils.clickWithTimeOut(Driver.get().findElement(By.xpath(moduleLocator)),  5);
         }
+
+
     }
+
+     */
 
 }
