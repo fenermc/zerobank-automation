@@ -1,10 +1,18 @@
-Feature: Account Activity page
+@wip
+Feature: Navigating to specific accounts in Accounts Activity
 
   Background:
-    Given user in the login page
-    And user enter valid credentials "username" "password"
-    When the user navigates to "Account Activity"
+    Given the user is logged in
 
-  Scenario: Page title
+  Scenario Outline: <accountType> account redirect
+    When the user clicks on "<accountType>" link on the Account Summary page
+    Then the "<pageTitle>" page should be displayed
+    And Account drop down should have "<accountType>" selected
 
-    Then page should have the title "Zero - Account Activity"
+    Examples:
+      | accountType | pageTitle        |
+      | Savings     | Account Activity |
+      | Checking    | Account Activity |
+      | Loan        | Account Activity |
+      | Credit Card | Account Activity |
+      | Brokerage   | Account Activity |

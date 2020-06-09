@@ -1,5 +1,6 @@
 package com.zerobank.pages;
 
+import com.zerobank.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,8 +13,18 @@ public class AccountSummaryPage extends BasePage {
     @FindBy(xpath = "//h2[@class='board-header']")
     public List<WebElement> accountTypes;
 
-    @FindBy(xpath = "//th[@xpath='1']/parent::tr/th")
+    @FindBy(xpath = "//div[3]//div[1]//table[1]//thead[1]//tr[1]/th")
     public List<WebElement> columnsCreditAccount;
+
+
+
+
+    public void goToAccountType (String accName){
+        Driver.get().findElement(By.linkText(accName)).click();
+    }
+
+
+
 
 
     public void goToAccount(String chooseAccount) {
