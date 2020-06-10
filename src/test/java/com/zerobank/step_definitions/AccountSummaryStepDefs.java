@@ -18,7 +18,7 @@ public class AccountSummaryStepDefs {
     public void the_user_navigates_to(String tab) {
 
         DashboardPage dashboardPage = new DashboardPage();
-        dashboardPage.goToTab(tab);
+       // dashboardPage.goToTab(tab);
     }
 
     @Then("page should have the title {string}")
@@ -31,15 +31,16 @@ public class AccountSummaryStepDefs {
 
 
     @Then("page should have to following account types:")
-    public void page_should_have_to_following_account_types(List<String> accountTypes) {
+    public void page_should_have_to_following_account_types(List<String> accountsFromFeature) {
         BrowserUtils.waitFor(2);
-        AccountSummaryPage accountSummaryPage = new AccountSummaryPage();
-        List<String>actualAccounts = BrowserUtils.getElementsText(accountSummaryPage.accountTypes);
+        //AccountSummaryPage accountSummaryPage = new AccountSummaryPage();
+        //List<String>actualAccounts = BrowserUtils.getElementsText(accountSummaryPage.accountTypes);
+        List<String>actualAccounts = BrowserUtils.getElementsText(new AccountSummaryPage().accountTypes);
 
-        Assert.assertEquals(accountTypes, actualAccounts);
+        Assert.assertEquals(accountsFromFeature, actualAccounts);
         System.out.println("actualAccounts = " + actualAccounts);
-        System.out.println("accountTypes = " + accountTypes);
-        System.out.println("accountSummaryPage.accountTypes = " + accountSummaryPage.accountTypes.size());
+        System.out.println("accountTypes = " + accountsFromFeature);
+        System.out.println("accountSummaryPage.accountTypes = " + new AccountSummaryPage().accountTypes.size());
 
     }
 

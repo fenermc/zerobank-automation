@@ -1,10 +1,16 @@
 package com.zerobank.pages;
 
+import com.zerobank.utilities.BrowserUtils;
+import com.zerobank.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 public class AccountActivityPage extends BasePage {
 
@@ -20,10 +26,10 @@ public class AccountActivityPage extends BasePage {
     @FindBy (xpath = "//a[@href='#ui-tabs-2']")
     public WebElement findTransactions;
 
-    @FindBy (id = "id='aa_fromDate'")
+    @FindBy (id = "aa_fromDate")
     public WebElement startDate;
 
-    @FindBy (id = "id='aa_toDate'")
+    @FindBy (id = "aa_toDate")
     public WebElement endDate;
 
     @FindBy(xpath = "//button[@class='btn btn-primary']")
@@ -56,5 +62,31 @@ public class AccountActivityPage extends BasePage {
         Select select = new Select(accountDropDown);
         String act = select.getFirstSelectedOption().getText();
     return act.equals(expectedOption);
+    }
+
+
+    public void goToTransaction(String linkName){
+        Driver.get().findElement(By.linkText(linkName)).click();
+    }
+
+
+    public void setSearchDate(String startD, String endD) {
+        BrowserUtils.waitFor(1);
+        startDate.sendKeys(startD);
+
+        endDate.sendKeys(endD);
+
+        System.out.println("Find records between " + startD + " and " + endD);
+    }
+
+    public void clickSearch() {
+        findBtn.click();
+    }
+
+    public void isResultCorrect(String startD, String endD) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+
+       // Date date = simpleDateFormat.format(new Date());
+
     }
 }

@@ -23,6 +23,11 @@ public class LoginPage {
     public WebElement submit;
 
 
+    @FindBy(xpath = "//div[@class='alert alert-error']")
+    public WebElement unableToLoginAlert;
+
+
+
 
 
     public void login(String userNameStr, String passwordStr) {

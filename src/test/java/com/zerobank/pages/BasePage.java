@@ -39,33 +39,6 @@ public abstract class  BasePage {
         PageFactory.initElements(Driver.get(), this);
     }
 
-    public void goToTab(String tabName){
-
-        switch (tabName){
-            case "Account Summary":
-                menuOptions.get(0).click();
-                break;
-            case "Account Activity":
-                menuOptions.get(1).click();
-                break;
-
-            case "Transfer Funds":
-                menuOptions.get(2).click();
-                break;
-
-            case "Pay Bills":
-                menuOptions.get(3).click();
-                break;
-
-            case "My Money Map":
-                menuOptions.get(4).click();
-                break;
-
-            case "Online Statements":
-                menuOptions.get(5).click();
-                break;
-        }
-    }
 
     public String getUserName(){
         BrowserUtils.waitForVisibility(userMenu, 5);
@@ -85,4 +58,7 @@ public abstract class  BasePage {
 
     }
 
+    public void goToAccountActivity(){
+        Driver.get().findElement(By.linkText("Account Activity")).click();
+    }
 }
